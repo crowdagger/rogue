@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca03f2deb7f7r"]
+
+[ext_resource type="Texture2D" uid="uid://o3nrnknukyoc" path="res://assets/castle.png" id="1_tgiub"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qi3fj"]
+size = Vector2(54, 9)
+
+[node name="Platform" type="AnimatableBody2D"]
+position = Vector2(-7, 0)
+scale = Vector2(0.621003, 0.49448)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+scale = Vector2(1, 0.833333)
+texture = ExtResource("1_tgiub")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 22)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(29, -7)
+scale = Vector2(1, 0.833333)
+texture = ExtResource("1_tgiub")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 22)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(11, -3.5)
+shape = SubResource("RectangleShape2D_qi3fj")
+one_way_collision = true

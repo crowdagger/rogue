@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://700isp878oro"]
+
+[ext_resource type="Texture2D" uid="uid://o3nrnknukyoc" path="res://assets/castle.png" id="1_gev46"]
+[ext_resource type="Texture2D" uid="uid://knkmcufailbg" path="res://assets/comma.png" id="2_jie1e"]
+
+[sub_resource type="Gradient" id="Gradient_uo3or"]
+colors = PackedColorArray(0.947199, 0.947199, 0.947199, 1, 1, 1, 1, 0.470588)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_232d1"]
+gradient = SubResource("Gradient_uo3or")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x7858"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, 6, 0)
+emission_shape = 1
+emission_sphere_radius = 0.01
+angle_max = 22.6
+initial_velocity_max = 3.2
+gravity = Vector3(45, -50, 0)
+scale_min = 0.5
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_232d1")
+
+[node name="Chimney" type="StaticBody2D"]
+position = Vector2(0, -10)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_gev46")
+region_enabled = true
+region_rect = Rect2(94, 25, 17, 21)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-1.95, 2.7625)
+scale = Vector2(1.75, 0.734375)
+polygon = PackedVector2Array(5.6857, 9.85532, -0.0285703, -1.0383, -4.59999, 9.85532)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-2, -4)
+rotation = -0.00200799
+scale = Vector2(0.95211, 0.842049)
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_x7858")
+texture = ExtResource("2_jie1e")
+lifetime = 3.0

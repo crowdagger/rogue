@@ -1,0 +1,94 @@
+[gd_scene load_steps=10 format=3 uid="uid://bd8a15qqdk6hk"]
+
+[ext_resource type="Texture2D" uid="uid://bnutbpv8nn0ar" path="res://assets/coin.png" id="1_b27xc"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_tkr63"]
+
+[sub_resource type="Gradient" id="Gradient_b8ghe"]
+offsets = PackedFloat32Array(0, 0.99697, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_guuf6"]
+gradient = SubResource("Gradient_b8ghe")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ximv"]
+atlas = ExtResource("1_b27xc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsyet"]
+atlas = ExtResource("1_b27xc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bryu8"]
+atlas = ExtResource("1_b27xc")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxu6k"]
+atlas = ExtResource("1_b27xc")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fucfu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ximv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsyet")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bryu8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dxu6k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_tkr63")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 0.01
+anchor_right = 1.0
+anchor_bottom = 0.2
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_stretch_ratio = 1.05
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 15
+columns = 2
+
+[node name="LifeRect" type="NinePatchRect" parent="GridContainer"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+texture = SubResource("GradientTexture1D_guuf6")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GridContainer/MarginContainer"]
+scale = Vector2(4.31436, 4.31436)
+sprite_frames = SubResource("SpriteFrames_fucfu")
+autoplay = "default"
+
+[node name="LifeLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "42"
+horizontal_alignment = 1
+
+[node name="CoinLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "42"
+horizontal_alignment = 1
+
+[node name="FPS" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "42"

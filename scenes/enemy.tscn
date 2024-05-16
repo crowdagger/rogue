@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://blqarpulbh2b3"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_dbe05"]
+[ext_resource type="Texture2D" uid="uid://cy5paty7qu12j" path="res://assets/enemy.png" id="1_xvu0g"]
+[ext_resource type="PackedScene" uid="uid://r0sopx7cr4q7" path="res://scenes/killzone.tscn" id="2_dv3f0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dej5l"]
+atlas = ExtResource("1_xvu0g")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sa2dv"]
+atlas = ExtResource("1_xvu0g")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgg6a"]
+atlas = ExtResource("1_xvu0g")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5car3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dej5l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sa2dv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dej5l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgg6a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ari0a"]
+radius = 4.272
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_p017r"]
+polygon = PackedVector2Array(0, -10.2977, 1.92176, -9.65406, 3.20293, -8.36685, 3.84351, -6.43604, 3.84351, -4.50523, 3.20293, -3.21802, 1.92176, -1.93081, 0, -1.93081, -2.56234, -2.57442, -4.4841, -5.14883, -3.84351, -8.36685, -2.56234, -9.65406, -0.640585, -10.2977)
+
+[node name="Enemy" type="Node2D"]
+position = Vector2(0, -1)
+scale = Vector2(1.56107, 1.55375)
+script = ExtResource("1_dbe05")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_5car3")
+autoplay = "default"
+frame = 3
+frame_progress = 0.453949
+
+[node name="Killzone" parent="." instance=ExtResource("2_dv3f0")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_ari0a")
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, -6)
+scale = Vector2(0.993161, 1)
+target_position = Vector2(8.96819, -0.43604)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, -6)
+target_position = Vector2(-10.2494, 0.207564)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_p017r")
