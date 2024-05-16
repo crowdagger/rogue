@@ -9,6 +9,7 @@ var direction = 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	return
 	if ray_cast_right.is_colliding():
 		direction = -1
 		sprite.flip_h = true;

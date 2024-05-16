@@ -9,6 +9,9 @@ const JUMP_ROTATION := 10.0
 
 var rotating := false
 var hitting := false
+var can_hit := true
+
+@onready var whip_hitbox = $Whip/CollisionShape2D
 
 @onready var sprite = $AnimatedSprite2D
 @onready var timer = $HitDelay
@@ -25,12 +28,13 @@ func death():
 
 func _physics_process(delta):
 		# Hit
-	if Input.is_action_pressed("hit"):
+	if Input.is_action_pressed("hit") and can_hit:
+		can_hit = false
 		rotating = false
 		sprite.rotation = 0
-		print("hit")
 		sprite.play("hit")
 		hitting = true
+		whip_hitbox.disabled = false
 		timer.start()
 
 	
@@ -75,4 +79,18 @@ func _physics_process(delta):
 
 func _on_hit_delay_timeout():
 	hitting = false
-	# TODO: calculate hitbox and actually hit enemy
+	whip_hitbox.disabled = true
+	$HitRecovery.start()
+	
+
+
+func _on_whip_body_entered(body):
+	if "get_hit" in body:
+		$AudioStreamPlayer2D.playing = true
+		body.get_hit(3)
+	print("Whipping")
+	print(body)
+
+
+func _on_hit_recovery_timeout():
+	can_hit = true

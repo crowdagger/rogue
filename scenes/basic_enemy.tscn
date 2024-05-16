@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://dxtsi47265laa"]
+
+[ext_resource type="Texture2D" uid="uid://cy5paty7qu12j" path="res://assets/enemy.png" id="1_2x3pi"]
+[ext_resource type="Script" path="res://scripts/basic_enemy.gd" id="1_d7l38"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_it4d7"]
+atlas = ExtResource("1_2x3pi")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ar8m0"]
+atlas = ExtResource("1_2x3pi")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83vjd"]
+atlas = ExtResource("1_2x3pi")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jx84m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_it4d7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ar8m0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83vjd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_56lc4"]
+size = Vector2(18, 18)
+
+[node name="BasicEnemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_d7l38")
+hp = 5
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -9)
+scale = Vector2(1.75, 1.5625)
+sprite_frames = SubResource("SpriteFrames_jx84m")
+autoplay = "default"
+frame_progress = 0.70357
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -11)
+shape = SubResource("RectangleShape2D_56lc4")
+
+[node name="Invulnerability" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="Invulnerability" to="." method="_on_invulnerability_timeout"]

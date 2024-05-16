@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://dfo8oaq10d8b8"]
+[gd_scene load_steps=17 format=3 uid="uid://dfo8oaq10d8b8"]
 
 [ext_resource type="Script" path="res://scripts/character.gd" id="1_8du8d"]
 [ext_resource type="Texture2D" uid="uid://cmiaek7ysvgsq" path="res://assets/characters.png" id="2_lcwmk"]
+[ext_resource type="AudioStream" uid="uid://ck7ovdq52spk" path="res://assets/hit.mp3" id="3_j6waw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fh43m"]
 atlas = ExtResource("2_lcwmk")
@@ -53,7 +54,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hit",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -96,9 +97,13 @@ radius = 7.0
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q5w4e"]
 polygon = PackedVector2Array(-2, -17, 3, -13, 5, -10, 4, -5, 0, -2, -4, -2, -8, -5, -9, -10, -8, -13)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wnapa"]
+size = Vector2(31.5, 20)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 z_index = 2
-collision_layer = 2
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_8du8d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -118,6 +123,26 @@ shape = SubResource("CircleShape2D_1flfw")
 occluder = SubResource("OccluderPolygon2D_q5w4e")
 
 [node name="HitDelay" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="Whip" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Whip"]
+position = Vector2(9.25, -11)
+shape = SubResource("RectangleShape2D_wnapa")
+disabled = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_j6waw")
+pitch_scale = 1.68
+
+[node name="HitRecovery" type="Timer" parent="."]
 wait_time = 0.5
+one_shot = true
 
 [connection signal="timeout" from="HitDelay" to="." method="_on_hit_delay_timeout"]
+[connection signal="body_entered" from="Whip" to="." method="_on_whip_body_entered"]
+[connection signal="timeout" from="HitRecovery" to="." method="_on_hit_recovery_timeout"]
