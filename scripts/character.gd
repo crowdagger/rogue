@@ -4,14 +4,20 @@ extends CharacterBody2D
 const SPEED := 200.0
 # Reverse of inertia
 const ACCELERATION := 1.0
-const JUMP_VELOCITY := -250.0
+const JUMP_VELOCITY := -150.0
+const JUMP_BOOST := -10.0
 const JUMP_ROTATION := 10.0
 const BOUNCE := 20.0
+const JUMP_TICK := 0.02
+const MAX_JUMP_TICKS := 8
 
 var rotating := false
 var hitting := false
 var can_hit := true
 var vulnerable := true
+var can_jump := true
+var since_jump_start := 0.0
+
 
 @onready var death_timer = $DeathTimer
 
@@ -61,9 +67,21 @@ func hit():
 
 
 func _physics_process(delta):
+	if Input.is_action_just_released("jump"):
+		since_jump_start = 0.0
+		can_jump = true
+	
 		# Hit
 	if Input.is_action_pressed("hit") and can_hit:
 		hit()
+		
+	# Add some boom to the jump if key is holded
+	if Input.is_action_pressed("jump") and not can_jump:
+		since_jump_start += delta
+		var n = int(since_jump_start / JUMP_TICK)
+		if n < MAX_JUMP_TICKS:
+			velocity.y = JUMP_VELOCITY + JUMP_BOOST * n
+		print(n)
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -73,9 +91,10 @@ func _physics_process(delta):
 		sprite.rotation = move_toward(sprite.rotation, 0, JUMP_ROTATION)
 	if not hitting: 
 		# Handle jump
-		if Input.is_action_just_pressed("jump") and is_on_floor():
+		if Input.is_action_pressed("jump") and is_on_floor() and can_jump:
+			can_jump = false
 			rotating = true
-			velocity.y = JUMP_VELOCITY
+			velocity.y += JUMP_VELOCITY
 
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
