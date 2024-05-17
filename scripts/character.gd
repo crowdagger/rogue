@@ -16,7 +16,8 @@ var vulnerable := true
 @onready var death_timer = $DeathTimer
 
 
-@onready var whip_hitbox = $Whip/CollisionShape2D
+@onready var hitbox_l = $Whip/HitBoxLeft
+@onready var hitbox_r = $Whip/HitBoxRight
 
 @onready var sprite = $AnimatedSprite2D
 @onready var timer = $HitDelay
@@ -50,7 +51,10 @@ func hit():
 	sprite.rotation = 0
 	sprite.play("hit")
 	hitting = true
-	whip_hitbox.disabled = false
+	if sprite.flip_h:
+		hitbox_l.disabled = false
+	else:
+		hitbox_r.disabled = false
 	timer.start()
 
 
@@ -91,7 +95,8 @@ func _physics_process(delta):
 
 func _on_hit_delay_timeout():
 	hitting = false
-	whip_hitbox.disabled = true
+	hitbox_l.disabled = true
+	hitbox_r.disabled = true
 	$HitRecovery.start()
 	
 
