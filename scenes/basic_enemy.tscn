@@ -25,6 +25,9 @@ animations = [{
 "texture": SubResource("AtlasTexture_ar8m0")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_it4d7")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_83vjd")
 }],
 "loop": true,
@@ -50,10 +53,10 @@ position = Vector2(1, -9)
 scale = Vector2(1.75, 1.5625)
 sprite_frames = SubResource("SpriteFrames_jx84m")
 autoplay = "default"
-frame_progress = 0.70357
+frame_progress = 0.522937
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -9)
+position = Vector2(1, -8)
 shape = SubResource("CircleShape2D_cguvr")
 
 [node name="Invulnerability" type="Timer" parent="."]
@@ -64,7 +67,7 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageHitbox"]
-position = Vector2(0, -9)
+position = Vector2(1, -8)
 shape = SubResource("CircleShape2D_u8503")
 
 [connection signal="timeout" from="Invulnerability" to="." method="_on_invulnerability_timeout"]
