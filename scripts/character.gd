@@ -17,6 +17,7 @@ var can_hit := true
 var vulnerable := true
 var can_jump := true
 var since_jump_start := 0.0
+var has_whip := false
 
 
 @onready var death_timer = $DeathTimer
@@ -72,7 +73,7 @@ func _physics_process(delta):
 		can_jump = true
 	
 		# Hit
-	if Input.is_action_pressed("hit") and can_hit:
+	if Input.is_action_pressed("hit") and can_hit and has_whip:
 		hit()
 		
 	# Add some boom to the jump if key is holded

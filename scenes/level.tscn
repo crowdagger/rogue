@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dlbmhe4akxjc8"]
+[gd_scene load_steps=33 format=3 uid="uid://dlbmhe4akxjc8"]
 
 [ext_resource type="PackedScene" uid="uid://dfo8oaq10d8b8" path="res://scenes/character.tscn" id="1_ng6gi"]
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_uapup"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://2e38t6d87s2u" path="res://scenes/lampe.tscn" id="10_sowm6"]
 [ext_resource type="Shader" path="res://shaders/shockwave.gdshader" id="13_ebjd0"]
 [ext_resource type="PackedScene" uid="uid://bd8a15qqdk6hk" path="res://scenes/hud.tscn" id="13_tq3yj"]
+[ext_resource type="PackedScene" uid="uid://c0aceb7mg73bu" path="res://scenes/merchant.tscn" id="14_fejto"]
 [ext_resource type="PackedScene" uid="uid://dxtsi47265laa" path="res://scenes/basic_enemy.tscn" id="14_vwjns"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7hk0a"]
@@ -376,5 +377,11 @@ position = Vector2(14, -152)
 
 [node name="BasicEnemy" parent="Enemies" instance=ExtResource("14_vwjns")]
 position = Vector2(44, 1)
+
+[node name="Coin" parent="." instance=ExtResource("4_f6y1w")]
+position = Vector2(-238, 9)
+
+[node name="Merchant" parent="." instance=ExtResource("14_fejto")]
+position = Vector2(287, 37)
 
 [connection signal="player_died" from="CharacterBody2D" to="." method="_on_character_body_2d_player_died"]
