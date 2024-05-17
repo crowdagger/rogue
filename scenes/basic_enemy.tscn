@@ -33,9 +33,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cguvr"]
-radius = 6.32456
+radius = 8.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_he8gr"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_u8503"]
+radius = 9.0
 
 [node name="BasicEnemy" type="CharacterBody2D"]
 disable_mode = 2
@@ -52,7 +53,7 @@ autoplay = "default"
 frame_progress = 0.70357
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -11)
+position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_cguvr")
 
 [node name="Invulnerability" type="Timer" parent="."]
@@ -63,8 +64,8 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageHitbox"]
-position = Vector2(1, -11)
-shape = SubResource("RectangleShape2D_he8gr")
+position = Vector2(0, -9)
+shape = SubResource("CircleShape2D_u8503")
 
 [connection signal="timeout" from="Invulnerability" to="." method="_on_invulnerability_timeout"]
 [connection signal="body_entered" from="DamageHitbox" to="." method="_on_damage_hitbox_body_entered"]
