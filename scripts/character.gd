@@ -15,6 +15,7 @@ var vulnerable := true
 
 @onready var death_timer = $DeathTimer
 
+@onready var game_over = $GameOver
 
 @onready var hitbox_l = $Whip/HitBoxLeft
 @onready var hitbox_r = $Whip/HitBoxRight
@@ -32,6 +33,7 @@ func death():
 	Engine.time_scale = 0.5
 	sprite.flip_v = true
 	self.get_node("CollisionShape2D").queue_free()
+	game_over.playing = true
 	death_timer.start()
 	player_died.emit()
 	
