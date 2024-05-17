@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dlbmhe4akxjc8"]
+[gd_scene load_steps=29 format=3 uid="uid://dlbmhe4akxjc8"]
 
 [ext_resource type="PackedScene" uid="uid://dfo8oaq10d8b8" path="res://scenes/character.tscn" id="1_ng6gi"]
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_uapup"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c3sn6qeeh3hc1" path="res://scenes/door.tscn" id="8_74dd6"]
 [ext_resource type="PackedScene" uid="uid://700isp878oro" path="res://scenes/chimney.tscn" id="9_en1cl"]
 [ext_resource type="PackedScene" uid="uid://2e38t6d87s2u" path="res://scenes/lampe.tscn" id="10_sowm6"]
+[ext_resource type="Shader" path="res://shaders/shockwave.gdshader" id="13_ebjd0"]
 [ext_resource type="PackedScene" uid="uid://bd8a15qqdk6hk" path="res://scenes/hud.tscn" id="13_tq3yj"]
 [ext_resource type="PackedScene" uid="uid://dxtsi47265laa" path="res://scenes/basic_enemy.tscn" id="14_vwjns"]
 
@@ -156,6 +157,48 @@ sources/1 = SubResource("TileSetAtlasSource_jkqju")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6pr3r"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h26ji"]
+shader = ExtResource("13_ebjd0")
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/force = 0.2
+shader_parameter/size = 0.0
+
+[sub_resource type="Animation" id="Animation_erwpy"]
+resource_name = "shockwave"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_pfhha"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gdl0j"]
+_data = {
+"RESET": SubResource("Animation_pfhha"),
+"shockwave": SubResource("Animation_erwpy")
+}
+
 [node name="Level" type="Node2D"]
 script = ExtResource("1_uapup")
 
@@ -259,5 +302,21 @@ shadow_color = Color(0, 0, 0, 0.419608)
 
 [node name="BasicEnemy" parent="." instance=ExtResource("14_vwjns")]
 position = Vector2(44, 1)
+
+[node name="PostProcess" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="PostProcess"]
+material = SubResource("ShaderMaterial_h26ji")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PostProcess"]
+libraries = {
+"": SubResource("AnimationLibrary_gdl0j")
+}
 
 [connection signal="player_died" from="CharacterBody2D" to="." method="_on_character_body_2d_player_died"]

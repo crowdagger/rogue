@@ -3,12 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://bnutbpv8nn0ar" path="res://assets/coin.png" id="1_b27xc"]
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_tkr63"]
 
-[sub_resource type="Gradient" id="Gradient_b8ghe"]
-offsets = PackedFloat32Array(0, 0.99697, 1)
-colors = PackedColorArray(1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1)
+[sub_resource type="Gradient" id="Gradient_nerp7"]
+offsets = PackedFloat32Array(0, 0.0285714, 1)
+colors = PackedColorArray(0, 1, 0, 1, 0.027451, 1, 0.027451, 1, 1, 0, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_guuf6"]
-gradient = SubResource("Gradient_b8ghe")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eg7m3"]
+gradient = SubResource("Gradient_nerp7")
+height = 32
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1ximv"]
 atlas = ExtResource("1_b27xc")
@@ -62,12 +63,11 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 15
 columns = 2
 
-[node name="LifeRect" type="NinePatchRect" parent="GridContainer"]
-custom_minimum_size = Vector2(100, 30)
+[node name="LifeBar" type="TextureProgressBar" parent="GridContainer"]
 layout_mode = 2
-texture = SubResource("GradientTexture1D_guuf6")
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 2
+max_value = 3.0
+value = 3.0
+texture_progress = SubResource("GradientTexture2D_eg7m3")
 
 [node name="MarginContainer" type="MarginContainer" parent="GridContainer"]
 layout_mode = 2

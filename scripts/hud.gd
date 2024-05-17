@@ -7,4 +7,5 @@ func _process(_delta):
 	fps.text = str(Engine.get_frames_per_second())
 	$GridContainer/LifeLabel.text = str(Global.hp)
 	$GridContainer/CoinLabel.text = str(Global.coins)
+	$GridContainer/LifeBar.value = Global.hp
 

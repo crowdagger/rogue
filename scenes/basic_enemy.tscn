@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dxtsi47265laa"]
+[gd_scene load_steps=9 format=3 uid="uid://dxtsi47265laa"]
 
 [ext_resource type="Texture2D" uid="uid://cy5paty7qu12j" path="res://assets/enemy.png" id="1_2x3pi"]
 [ext_resource type="Script" path="res://scripts/basic_enemy.gd" id="1_d7l38"]
@@ -32,10 +32,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_56lc4"]
-size = Vector2(18, 18)
+[sub_resource type="CircleShape2D" id="CircleShape2D_cguvr"]
+radius = 6.32456
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_he8gr"]
 
 [node name="BasicEnemy" type="CharacterBody2D"]
+disable_mode = 2
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_d7l38")
@@ -50,9 +53,18 @@ frame_progress = 0.70357
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -11)
-shape = SubResource("RectangleShape2D_56lc4")
+shape = SubResource("CircleShape2D_cguvr")
 
 [node name="Invulnerability" type="Timer" parent="."]
 wait_time = 0.5
 
+[node name="DamageHitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageHitbox"]
+position = Vector2(1, -11)
+shape = SubResource("RectangleShape2D_he8gr")
+
 [connection signal="timeout" from="Invulnerability" to="." method="_on_invulnerability_timeout"]
+[connection signal="body_entered" from="DamageHitbox" to="." method="_on_damage_hitbox_body_entered"]

@@ -1,10 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://dfo8oaq10d8b8"]
+[gd_scene load_steps=17 format=3 uid="uid://dfo8oaq10d8b8"]
 
 [ext_resource type="Script" path="res://scripts/character.gd" id="1_8du8d"]
 [ext_resource type="Texture2D" uid="uid://cmiaek7ysvgsq" path="res://assets/characters.png" id="2_lcwmk"]
 [ext_resource type="AudioStream" uid="uid://ck7ovdq52spk" path="res://assets/hit.mp3" id="3_j6waw"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4v6b2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fh43m"]
 atlas = ExtResource("2_lcwmk")
@@ -109,7 +107,6 @@ collision_mask = 3
 script = ExtResource("1_8du8d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_4v6b2")
 position = Vector2(-2, -10)
 scale = Vector2(1.38727, 1.36691)
 sprite_frames = SubResource("SpriteFrames_m8xjk")
@@ -150,10 +147,7 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
-[node name="DeathTimer" type="Timer" parent="."]
-
 [connection signal="timeout" from="HitDelay" to="." method="_on_hit_delay_timeout"]
 [connection signal="body_entered" from="Whip" to="." method="_on_whip_body_entered"]
 [connection signal="timeout" from="HitRecovery" to="." method="_on_hit_recovery_timeout"]
 [connection signal="timeout" from="Invulnerability" to="." method="_on_invulnerability_timeout"]
-[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timeout"]

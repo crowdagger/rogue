@@ -20,7 +20,8 @@ func get_hit(dmg: int):
 
 # Called at death
 func die():
-	collision.disabled = true
+	collision.queue_free()
+	$DamageHitbox.queue_free()
 	var tween = get_tree().create_tween()
 	tween.tween_property(sprite, "modulate", Color(1.0, 0, 0, 0.0), 1)
 	tween.tween_callback(queue_free)
@@ -30,3 +31,8 @@ func die():
 func _on_invulnerability_timeout():
 	sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	vulnerable = true
+
+
+func _on_damage_hitbox_body_entered(body):
+	if "get_hit" in body:
+		body.get_hit(1, position)
