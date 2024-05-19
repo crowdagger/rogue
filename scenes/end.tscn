@@ -1,0 +1,141 @@
+[gd_scene load_steps=9 format=3 uid="uid://cmgjto0km72wy"]
+
+[ext_resource type="Texture2D" uid="uid://cmiaek7ysvgsq" path="res://assets/characters.png" id="1_tq1oo"]
+
+[sub_resource type="Gradient" id="Gradient_u14pc"]
+colors = PackedColorArray(0, 0, 0, 1, 0.297738, 0.00102918, 0.526893, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8in1m"]
+gradient = SubResource("Gradient_u14pc")
+width = 2000
+height = 1000
+fill_to = Vector2(1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ml3yk"]
+atlas = ExtResource("1_tq1oo")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_miic8"]
+atlas = ExtResource("1_tq1oo")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uduxh"]
+atlas = ExtResource("1_tq1oo")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ao2b5"]
+atlas = ExtResource("1_tq1oo")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wenbh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ml3yk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_miic8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ml3yk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_miic8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ml3yk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_miic8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ml3yk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_miic8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uduxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_miic8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uduxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_miic8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uduxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_miic8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uduxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_miic8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uduxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ao2b5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uduxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ao2b5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uduxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ao2b5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uduxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ao2b5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uduxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ao2b5")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="End" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -760.0
+offset_top = -390.0
+offset_right = 1240.0
+offset_bottom = 610.0
+texture = SubResource("GradientTexture2D_8in1m")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-11, -100)
+scale = Vector2(13.25, 13.25)
+sprite_frames = SubResource("SpriteFrames_wenbh")
+autoplay = "default"
+frame = 1
+frame_progress = 0.178401
+
+[node name="Label" type="Label" parent="."]
+offset_left = -377.0
+offset_top = 42.0
+offset_right = 389.0
+offset_bottom = 363.0
+theme_override_font_sizes/font_size = 67
+text = "THANKS FOR PLAYING!!!"

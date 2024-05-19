@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dlbmhe4akxjc8"]
+[gd_scene load_steps=43 format=3 uid="uid://dlbmhe4akxjc8"]
 
 [ext_resource type="PackedScene" uid="uid://dfo8oaq10d8b8" path="res://scenes/character.tscn" id="1_ng6gi"]
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_uapup"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bd8a15qqdk6hk" path="res://scenes/hud.tscn" id="13_tq3yj"]
 [ext_resource type="PackedScene" uid="uid://c0aceb7mg73bu" path="res://scenes/merchant.tscn" id="14_fejto"]
 [ext_resource type="PackedScene" uid="uid://dxtsi47265laa" path="res://scenes/basic_enemy.tscn" id="14_vwjns"]
+[ext_resource type="PackedScene" uid="uid://8lbaal4miuht" path="res://scenes/gate.tscn" id="16_pdpov"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7hk0a"]
 polygon = PackedVector2Array(-8, -11, -4, -8.25, 4, -8.25, 8, -11, 6, -5.5, 6, 5.5, 8, 11, 4, 8.25, -4, 8.25, -8, 11, -6, 5.5, -6, -5.5)
@@ -456,10 +457,10 @@ position = Vector2(-561, -285)
 position = Vector2(-566, -346)
 
 [node name="Label" type="Label" parent="."]
-offset_left = -147.0
-offset_top = -608.0
-offset_right = 375.0
-offset_bottom = -535.0
+offset_left = -329.0
+offset_top = -615.0
+offset_right = 193.0
+offset_bottom = -542.0
 theme_override_font_sizes/font_size = 53
 text = "CONGRATURATIONS"
 uppercase = true
@@ -488,5 +489,8 @@ scale = Vector2(2.1875, 2.97679)
 texture = ExtResource("2_hpfy1")
 region_enabled = true
 region_rect = Rect2(1, 50, 8, 7)
+
+[node name="Gate" parent="." instance=ExtResource("16_pdpov")]
+position = Vector2(237, -507)
 
 [connection signal="player_died" from="CharacterBody2D" to="." method="_on_character_body_2d_player_died"]

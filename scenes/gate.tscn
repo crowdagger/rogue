@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://8lbaal4miuht"]
+
+[ext_resource type="Script" path="res://scripts/gate.gd" id="1_mwsyn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qen1m"]
+size = Vector2(231.5, 106.5)
+
+[node name="Gate" type="Node2D"]
+script = ExtResource("1_mwsyn")
+next_scene = "res://scenes/end.tscn"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-12, 7)
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(10, -53)
+shape = SubResource("RectangleShape2D_qen1m")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
