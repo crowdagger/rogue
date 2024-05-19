@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://8lbaal4miuht"]
+[gd_scene load_steps=4 format=3 uid="uid://8lbaal4miuht"]
 
 [ext_resource type="Script" path="res://scripts/gate.gd" id="1_mwsyn"]
+[ext_resource type="PackedScene" uid="uid://d3jcd364v47qs" path="res://scenes/transition.tscn" id="2_f1hsb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qen1m"]
 size = Vector2(231.5, 106.5)
@@ -16,5 +17,7 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(10, -53)
 shape = SubResource("RectangleShape2D_qen1m")
+
+[node name="Transition" parent="." instance=ExtResource("2_f1hsb")]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
