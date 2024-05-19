@@ -1,15 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bd8a15qqdk6hk"]
+[gd_scene load_steps=9 format=3 uid="uid://bd8a15qqdk6hk"]
 
 [ext_resource type="Texture2D" uid="uid://bnutbpv8nn0ar" path="res://assets/coin.png" id="1_b27xc"]
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_tkr63"]
-
-[sub_resource type="Gradient" id="Gradient_nerp7"]
-offsets = PackedFloat32Array(0, 0.0285714, 1)
-colors = PackedColorArray(0, 1, 0, 1, 0.027451, 1, 0.027451, 1, 1, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_eg7m3"]
-gradient = SubResource("Gradient_nerp7")
-height = 32
+[ext_resource type="Texture2D" uid="uid://bais1tmasnsau" path="res://assets/life_texture.png" id="2_is8uu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1ximv"]
 atlas = ExtResource("1_b27xc")
@@ -59,7 +52,7 @@ anchor_bottom = 0.2
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_stretch_ratio = 1.05
-theme_override_constants/h_separation = 20
+theme_override_constants/h_separation = 40
 theme_override_constants/v_separation = 15
 columns = 2
 
@@ -67,7 +60,7 @@ columns = 2
 layout_mode = 2
 max_value = 3.0
 value = 3.0
-texture_progress = SubResource("GradientTexture2D_eg7m3")
+texture_progress = ExtResource("2_is8uu")
 
 [node name="MarginContainer" type="MarginContainer" parent="GridContainer"]
 layout_mode = 2
@@ -75,7 +68,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GridContainer/MarginContainer"]
-scale = Vector2(4.31436, 4.31436)
+position = Vector2(-2.52001, 10.52)
+scale = Vector2(2.53218, 2.53218)
 sprite_frames = SubResource("SpriteFrames_fucfu")
 autoplay = "default"
 
@@ -90,5 +84,6 @@ text = "42"
 horizontal_alignment = 1
 
 [node name="FPS" type="Label" parent="GridContainer"]
+visible = false
 layout_mode = 2
 text = "42"
