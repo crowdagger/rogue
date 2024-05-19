@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var animation = $AnimationPlayer
 
+
 func change_scene(target: String) -> void:
 	animation.play("fade_to_black")
 	await animation.animation_finished
