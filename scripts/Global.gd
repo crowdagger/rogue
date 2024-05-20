@@ -6,17 +6,25 @@ signal variable_updated
 
 var paused := false
 
+func pause_menu():
+	if not paused:
+		paused = true
+	else:
+		paused = false
+	if paused:
+		$PauseMenu.show()
+		$PauseMenu.set_focus()
+		Engine.time_scale = 0.0
+		music.playing = false
+	else:
+		$PauseMenu.hide()
+		Engine.time_scale = 1.0
+		music.playing = true
+
+
 func _physics_process(delta):
 	if Input.is_action_just_pressed("pause"):
-		if not paused:
-			paused = true
-			Engine.time_scale = 0.0
-			music.playing = false
-		else:
-			paused = false
-			Engine.time_scale = 1.0
-			music.playing = true
-
+		pause_menu()
 
 @export var hp_max:int = 3
 var hp := hp_max:

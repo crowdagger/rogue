@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcl3hidkdssns"]
+
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_470ym"]
+[ext_resource type="Shader" path="res://shaders/pause_menu.gdshader" id="2_ekibh"]
+[ext_resource type="Theme" uid="uid://c27b7ump1rgpq" path="res://themes/default.tres" id="3_taxny"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i3lqk"]
+shader = ExtResource("2_ekibh")
+shader_parameter/blur = 2.75
+shader_parameter/rect_color = null
+
+[node name="PauseMenu" type="CanvasLayer"]
+script = ExtResource("1_470ym")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_i3lqk")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.968627, 0, 0, 0.94902)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -33.0
+offset_right = 36.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_taxny")
+text = "RESUME"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_taxny")
+text = "QUIT"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1su0nx7f5bq1"]
+[gd_scene load_steps=4 format=3 uid="uid://c1su0nx7f5bq1"]
 
 [ext_resource type="Script" path="res://scripts/Global.gd" id="1_yv7y8"]
 [ext_resource type="AudioStream" uid="uid://cc100pfth31em" path="res://assets/upbeatoverworld.mp3" id="2_b20uq"]
+[ext_resource type="PackedScene" uid="uid://bcl3hidkdssns" path="res://scenes/pause_menu.tscn" id="3_s7aqf"]
 
 [node name="Global" type="Node"]
 script = ExtResource("1_yv7y8")
@@ -10,3 +11,7 @@ script = ExtResource("1_yv7y8")
 stream = ExtResource("2_b20uq")
 autoplay = true
 bus = &"Music"
+
+[node name="PauseMenu" parent="." instance=ExtResource("3_s7aqf")]
+layer = 3
+visible = false
